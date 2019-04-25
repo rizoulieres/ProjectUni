@@ -33,13 +33,23 @@ class Welcome extends CI_Controller {
 			$univ = $this->input->post('univ');
 			$mdp = $this->input->post('pass');
 			$mdp = sha1($mdp);
-			$mail = $this->input->post('mail');
+			$mail = $this->input->post('email');
 
 
-			if($this->UserModel->checkUsername($username)) {
+			if($this->UserModel->checkUsername($username) && $this->UserModel->checkMail($mail) ) {
 					$this->UserModel->createUser($username, $nom, $prenom, $mdp, $univ,$mail);
-			}else
-				$data["checkUsername"]="Username déjà utilisé";
+			}else{
+				if(!$this->UserModel->checkUsername($username)){
+					$data["checkUsername"]="Username déjà utilisé";
+				}
+
+				if(!$this->UserModel->checkMail($mail)){
+					$data["checkMail"]="Mail déjà utilisé";
+				}
+
+
+			}
+
 		}
 
 

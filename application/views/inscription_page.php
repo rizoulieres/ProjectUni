@@ -30,6 +30,12 @@
 					<span class="focus-input100" data-symbol="&#xf206;"></span>
 				</div>
 
+
+				<?php if(isset($checkMail)) { ?>
+					<div class="alert alert-warning" role="alert">
+						<i class="fas fa-exclamation-circle"></i> <?php echo $checkMail ?>
+					</div>
+				<?php } ?>
 				<div class="wrap-input100 validate-input m-b-23" data-validate = "Mail requis">
 					<span class="label-input100">Mail personel ou universitaire</span>
 					<input class="input100" type="email" name="email" placeholder="jean.dupond@nomdedomaine.com">
