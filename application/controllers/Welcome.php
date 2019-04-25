@@ -3,23 +3,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
+	public function connexion()
 	{
-		$this->load->view('welcome_message');
+		if($_POST){
+			$username = $this->input->post('username');
+			$mdp = $this->input->post('pass');
+
+			//TO DO Créer fonction de vérification dans le model
+			//Rediriger vers acceuil si OK Sinon $error;
+
+			//créer une nouveau controlleur pour acceuil
+		}
+
+
+		$this->layout->set_theme('welcome');
+		$this->layout->set_titre('Page de connexion');
+		$this->layout->view('login_page');
+	}
+
+	public function inscription()
+	{
+		$this->load->model('UserModel');
+		$data = array();
+
+		if($_POST){
+			$username= $this->input->post('username');
+			$nom= $this->input->post('nom');
+			$prenom = $this->input->post('prenom');
+			$univ = $this->input->post('univ');
+			$mdp = $this->input->post('pass');
+			$mdp = sha1($mdp);
+			$mail = $this->input->post('mail');
+
+
+			if($this->UserModel->checkUsername($username)) {
+					$this->UserModel->createUser($username, $nom, $prenom, $mdp, $univ,$mail);
+			}else
+				$data["checkUsername"]="Username déjà utilisé";
+		}
+
+
+
+
+		$data['univ'] = $this->UserModel->getUniv();
+		$this->layout->set_theme('welcome');
+		$this->layout->set_titre('Inscription');
+		$this->layout->view('inscription_page',$data);
 	}
 }
