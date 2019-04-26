@@ -5,20 +5,25 @@ class Welcome extends CI_Controller {
 
 	public function connexion()
 	{
+		$data=array();
+		$this->load->model('UserModel');
+
 		if($_POST){
 			$username = $this->input->post('username');
 			$mdp = $this->input->post('pass');
 
-			//TO DO Créer fonction de vérification dans le model
-			//Rediriger vers acceuil si OK Sinon $error;
+			if($this->UserModel->etablirConnexion($username,$mdp)){
+				//redirect vers acceuil
+			}else{
+				$data['login_error']="Les données fournies n'ont pas permis de vous identifier";
+			}
 
-			//créer une nouveau controlleur pour acceuil
 		}
 
 
 		$this->layout->set_theme('welcome');
 		$this->layout->set_titre('Page de connexion');
-		$this->layout->view('login_page');
+		$this->layout->view('login_page',$data);
 	}
 
 	public function inscription()

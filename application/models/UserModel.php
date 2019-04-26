@@ -52,4 +52,36 @@ class UserModel extends CI_Model {
 
 	}
 
+
+	public function etablirConnexion($username,$password){
+		$this->db->select('password');
+		$this->db->select('id_user');
+		$this->db->from('user');
+		$this->db->where('username',$username);
+		$query=$this->db->get();
+
+		$num = $query->num_rows();
+
+		if($num<=0){
+
+			return false;
+
+		}else{
+			$query= $query->result();
+
+			$hashpass = $query[0]->password;
+			$id = $query[0]->id_user;
+
+			if($hashpass==sha1($password)){
+				$this->session->set_userdata('id',$id);
+				return true;
+			}
+		}
+
+
+
+		return false;
+
+	}
+
 }

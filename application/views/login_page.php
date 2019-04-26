@@ -6,6 +6,12 @@
 						Se connecter
 					</span>
 
+				<?php if(isset($login_error)) { ?>
+					<div class="alert alert-warning" role="alert">
+						<i class="fas fa-exclamation-circle"></i> <?php echo $login_error ?>
+					</div>
+				<?php } ?>
+
 				<div class="wrap-input100 validate-input m-b-23" data-validate = "Username requis">
 					<span class="label-input100">Username</span>
 					<input class="input100" type="text" name="username" placeholder="Votre identifiant">
