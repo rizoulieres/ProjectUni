@@ -13,7 +13,7 @@ class Welcome extends CI_Controller {
 			$mdp = $this->input->post('pass');
 
 			if($this->UserModel->etablirConnexion($username,$mdp)){
-				//redirect vers acceuil
+				redirect('/Main/home','refresh');
 			}else{
 				$data['login_error']="Les données fournies n'ont pas permis de vous identifier";
 			}
