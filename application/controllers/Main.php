@@ -7,10 +7,25 @@ class Main extends CI_Controller
 
 	public function home()
 	{
-		if($this->session->has_userdata('id')){
-			$id = $this->session->id;
+		$data = array();
 
-			//TO DO charger vue
+		if($this->session->has_userdata('id')){
+			$this->load->model('UserModel');
+			$id = $this->session->id;
+			$informations = $this->UserModel->getUserById($id);
+
+			$newdata = array(
+				'username'  => $informations->username,
+				'mail'     => $informations->mail,
+				'university' => $informations->id_univ,
+				'nom' => $informations->nom,
+				'prenom' => $informations->prenom
+			);
+
+			$this->session->set_userdata($newdata);
+
+			$this->layout->view('Main/vue_test',$data);
+
 
 		}else{
 			redirect('/Welcome/connexion','refresh');

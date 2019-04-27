@@ -31,3 +31,11 @@ if ( ! function_exists('img'))
 		return '<img src="' . img_url($nom) . '" alt="' . $alt . '" />';
 	}
 }
+
+if ( ! function_exists('vendor_url'))
+{
+	function vendor_url($nom)
+	{
+		return base_url() . 'assets/vendor/' . $nom;
+	}
+}

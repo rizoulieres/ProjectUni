@@ -84,4 +84,11 @@ class UserModel extends CI_Model {
 
 	}
 
+	public function getUserById($id){
+		$query = $this->db->select('*')->from('user')->where('id_user',$id)->get();
+
+		$query = $query->result();
+		return $query[0];
+	}
+
 }
