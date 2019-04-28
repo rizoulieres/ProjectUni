@@ -10,21 +10,9 @@ class Main extends CI_Controller
 		$data = array();
 
 		if($this->session->has_userdata('id')){
-			$this->load->model('UserModel');
-			$id = $this->session->id;
-			$informations = $this->UserModel->getUserById($id);
 
-			$newdata = array(
-				'username'  => $informations->username,
-				'mail'     => $informations->mail,
-				'university' => $informations->id_univ,
-				'nom' => $informations->nom,
-				'prenom' => $informations->prenom
-			);
-
-			$this->session->set_userdata($newdata);
-
-			$this->layout->view('Main/vue_test',$data);
+			$this->layout->set_titre('Accueil');
+			$this->layout->view('Main/accueil',$data);
 
 
 		}else{
@@ -37,6 +25,19 @@ class Main extends CI_Controller
 		if($this->session->has_userdata('id')){
 			session_destroy();
 			redirect('/Welcome/connexion','refresh');
+		}else{
+			redirect('/Welcome/connexion','refresh');
+		}
+	}
+
+	public function profil()
+	{
+		if($this->session->has_userdata('id')){
+
+			$this->layout->set_titre('Profil');
+			$this->layout->view('Main/profil');
+
+
 		}else{
 			redirect('/Welcome/connexion','refresh');
 		}

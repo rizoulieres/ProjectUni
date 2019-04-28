@@ -38,7 +38,7 @@
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active">
 			<a class="nav-link" href="<?php echo site_url('Main/home') ?>">
-				<i class="fas fa-fw fa-tachometer-alt"></i>
+				<i class="fas fa-fw fa-home"></i>
 				<span>Accueil</span></a>
 		</li>
 
@@ -203,7 +203,7 @@
 						</a>
 						<!-- Dropdown - User Information -->
 						<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-							<a class="dropdown-item" href="#">
+							<a class="dropdown-item" href="<?php echo site_url('Main/profil') ?>">
 								<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 								Profil
 							</a>
@@ -272,7 +272,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Sélectionnez "Deconnexion" en dessous, si vous êtes sur de vouloir fermez votre session actuelle.</div>
+				<div class="modal-body">Sélectionnez "Deconnexion" en dessous, si vous êtes sur de vouloir fermer votre session actuelle.</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
 					<a class="btn btn-primary" href="<?php echo site_url('Main/deco') ?>">Deconnexion</a>

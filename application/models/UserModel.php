@@ -54,8 +54,7 @@ class UserModel extends CI_Model {
 
 
 	public function etablirConnexion($username,$password){
-		$this->db->select('password');
-		$this->db->select('id_user');
+		$this->db->select('*');
 		$this->db->from('user');
 		$this->db->where('username',$username);
 		$query=$this->db->get();
@@ -70,10 +69,18 @@ class UserModel extends CI_Model {
 			$query= $query->result();
 
 			$hashpass = $query[0]->password;
-			$id = $query[0]->id_user;
+
+			$newdata = array(
+				'id' => $query[0]->id_user,
+				'username'  => $query[0]->username,
+				'mail'     => $query[0]->mail,
+				'university' => $query[0]->id_univ,
+				'nom' => $query[0]->nom,
+				'prenom' => $query[0]->prenom
+			);
 
 			if($hashpass==sha1($password)){
-				$this->session->set_userdata('id',$id);
+				$this->session->set_userdata($newdata);
 				return true;
 			}
 		}
