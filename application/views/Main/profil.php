@@ -18,12 +18,14 @@
 			<hr>
 			<div class="input-group">
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputGroupFile04">
-					<label class="custom-file-label" for="inputGroupFile04"></label>
+					<input type="file" class="custom-file-input" id="photoInput">
+					<label class="custom-file-label" for="photoInput">Choisir un fichier</label>
 				</div>
+				<input type="hidden" name="case" value="photo">
 				<div class="input-group-append">
 					<button class="btn btn-outline-success" type="submit">Valider</button>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -43,26 +45,26 @@
 				<div class="form-row">
 					<div class="col-6  mb-3">
 						<label for="nom">Nom</label>
-						<input type="text" class="form-control" id="nom" value="" readonly>
+						<input type="text" class="form-control" id="nom" name="nom" value="<?php echo $this->session->nom ?>" readonly>
 					</div>
-
+					<input type="hidden" name="case" value="infos">
 					<div class="col-6  mb-3">
 						<label for="prenom">Prénom</label>
-						<input type="text" class="form-control" id="prenom" value="" readonly>
+						<input type="text" class="form-control" id="prenom" name="prenom" value="<?php echo $this->session->prenom ?>" readonly>
 					</div>
 
 					<div class="col-6  mb-3">
 						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" value="" readonly>
+						<input type="email" class="form-control" id="mail" name="mail" value="<?php echo $this->session->mail ?>" readonly>
 					</div>
 					<div class="col-6  mb-3"></div>
 
 					<div class="col-6  mb-3">
 						<label for="univ">Université</label>
-						<input type="text" class="form-control" id="univ" value="" readonly>
+						<input type="text" class="form-control" id="univ" name="univ" value="<?php echo $name_univ ?>" readonly>
 					</div>
 
-					<div class="col-6"></div>
+					<div class="col-6 mb-3"></div>
 
 				</div>
 
@@ -79,19 +81,41 @@
 		<h6 class="m-0 font-weight-bold text-primary">Mot de passe</h6>
 	</a>
 	<!-- Card Content - Collapse -->
-	<div class="collapse" id="password">
+	<div class="collapse <?php echo ((isset($success) || isset($old_error) || isset($diff)) ? 'show': ''); ?>" id="password">
 		<div class="card-body">
 			<form action="" method="post">
 				<div class="form-row">
+					<?php if(isset($success)) { ?>
+					<div class="col-12">
+						<div class="alert alert-success" role="alert">
+							<?php echo $success ?>
+						</div>
+					</div>
+					<?php } ?>
+					<?php if(isset($old_error)) { ?>
+						<div class="col-12">
+							<div class="alert alert-danger" role="alert">
+								<?php echo $old_error?>
+							</div>
+						</div>
+					<?php } ?>
+					<?php if(isset($diff)) { ?>
+						<div class="col-12">
+							<div class="alert alert-danger" role="alert">
+								<?php echo $diff ?>
+							</div>
+						</div>
+					<?php } ?>
 					<div class="col-3">
-						<input type="password" class="form-control" placeholder="Ancien mot de passe">
+						<input type="password" class="form-control" placeholder="Ancien mot de passe" name="ancien" required>
 					</div>
 					<div class="col-4">
-						<input type="password" class="form-control" placeholder="Nouveau mot de passe">
+						<input type="password" class="form-control" placeholder="Nouveau mot de passe" name="new" required>
 					</div>
 					<div class="col-4">
-						<input type="password" class="form-control" placeholder="Confirmation">
+						<input type="password" class="form-control" placeholder="Confirmation" name="confirm" required>
 					</div>
+					<input type="hidden" name="case" value="pass">
 					<div class="col-1">
 						<button type="submit" class="btn btn-success btn-circle btn-sm">
 							<i class="fas fa-check"></i>
@@ -102,7 +126,6 @@
 		</div>
 	</div>
 </div>
-
 
 
 

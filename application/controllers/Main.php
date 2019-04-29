@@ -32,10 +32,37 @@ class Main extends CI_Controller
 
 	public function profil()
 	{
-		if($this->session->has_userdata('id')){
+		$this->load->model('UserModel');
+		$data = array();
 
+		if($_POST){
+			if($this->input->post('case') == 'pass'){
+				$old = $this->input->post('ancien');
+				$new = $this->input->post('new');
+				$confirm = $this->input->post('confirm');
+
+				if(sha1($old) == $this->UserModel->getHashPass($this->session->id)){
+					if($new == $confirm){
+						$this->UserModel->updatePass($this->session->id,sha1($new));
+						$data['success'] = "Votre mot de passe a bien été modifié";
+					}else{
+						$data['diff'] = "Les mots de passe ne correspondent pas";
+					}
+				}else{
+					$data['old_error'] = "L'ancien mot de passe est incorrect";
+				}
+			}elseif ($this->input->post('case') == 'photo'){
+				//TO DO
+			}elseif($this->input->post('case') == 'infos'){
+				//TO DO
+			}
+		}
+
+		if($this->session->has_userdata('id')){
+			$data['name_univ'] = $this->UserModel->getUnivById($this->session->university);
 			$this->layout->set_titre('Profil');
-			$this->layout->view('Main/profil');
+			$this->layout->ajouter_js('profile');
+			$this->layout->view('Main/profil',$data);
 
 
 		}else{

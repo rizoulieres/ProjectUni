@@ -98,4 +98,27 @@ class UserModel extends CI_Model {
 		return $query[0];
 	}
 
+	public function getUnivById($id){
+		$query = $this->db->select('libelle')->from('university')->where('id_univ',$id)->get();
+
+		$query = $query->result();
+		return $query[0]->libelle;
+	}
+
+	public function getHashPass($id){
+		$query = $this->db->select('password')->from('user')->where('id_user',$id)->get();
+
+		$query = $query->result();
+		return $query[0]->password;
+	}
+
+	public function updatePass($id,$newPass){
+		$data = array(
+			'password' => $newPass
+		);
+
+		$this->db->where('id_user', $id);
+		$this->db->update('user', $data);
+	}
+
 }

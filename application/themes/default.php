@@ -232,9 +232,7 @@
 </div>
 
 
-<?php foreach($js as $url): ?>
-	<script type="text/javascript" src="<?php echo $url; ?>"></script>
-<?php endforeach; ?>
+
 
 			</div>
 			<!-- /.container-fluid -->
@@ -297,6 +295,10 @@
 	<!-- Page level custom scripts -->
 	<script src="<?php echo js_url("demo/chart-area-demo") ?>"></script>
 	<script src="<?php echo js_url("demo/chart-pie-demo") ?>"></script>
+
+<?php foreach($js as $url): ?>
+	<script type="text/javascript" src="<?php echo $url; ?>"></script>
+<?php endforeach; ?>
 
 </body>
 
