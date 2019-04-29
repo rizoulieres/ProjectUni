@@ -16,9 +16,10 @@
 		<div class="card-body">
 			Votre photo de profil sera visible par tous les autres membres de UnivShop !
 			<hr>
+			<form enctype="multipart/form-data" action="" method="post">
 			<div class="input-group">
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="photoInput">
+					<input type="file" class="custom-file-input" id="photoInput" name="photo">
 					<label class="custom-file-label" for="photoInput">Choisir un fichier</label>
 				</div>
 				<input type="hidden" name="case" value="photo">
@@ -27,6 +28,7 @@
 				</div>
 
 			</div>
+			</form>
 		</div>
 	</div>
 </div>

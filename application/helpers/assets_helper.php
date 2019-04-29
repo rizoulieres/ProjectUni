@@ -24,6 +24,14 @@ if ( ! function_exists('img_url'))
 	}
 }
 
+if ( ! function_exists('img_profil'))
+{
+	function img_profil($nom)
+	{
+		return base_url() . 'uploads/profil/' . $nom;
+	}
+}
+
 if ( ! function_exists('img'))
 {
 	function img($nom, $alt = '')

@@ -76,7 +76,8 @@ class UserModel extends CI_Model {
 				'mail'     => $query[0]->mail,
 				'university' => $query[0]->id_univ,
 				'nom' => $query[0]->nom,
-				'prenom' => $query[0]->prenom
+				'prenom' => $query[0]->prenom,
+				'photo' => $query[0]->photo
 			);
 
 			if($hashpass==sha1($password)){
@@ -121,4 +122,19 @@ class UserModel extends CI_Model {
 		$this->db->update('user', $data);
 	}
 
+	public function getPhoto($id){
+		$query = $this->db->select('photo')->from('user')->where('id_user',$id)->get();
+
+		$query = $query->result();
+		return $query[0]->photo;
+	}
+
+	public function updatePhoto($id,$path){
+		$data = array(
+			'photo' => $path
+		);
+
+		$this->db->where('id_user', $id);
+		$this->db->update('user', $data);
+	}
 }
