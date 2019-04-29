@@ -25,7 +25,7 @@
 	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 		<!-- Sidebar - Brand -->
-		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url('Main/home') ?>">
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
 			</div>
@@ -74,7 +74,7 @@
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Vendre un :</h6>
-					<a class="collapse-item" href="#">Manuel scolaire</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/vendre') ?>">Manuel scolaire</a>
 					<a class="collapse-item" href="#">???</a>
 					<a class="collapse-item" href="#">??</a>
 					<a class="collapse-item" href="#">Autres</a>
