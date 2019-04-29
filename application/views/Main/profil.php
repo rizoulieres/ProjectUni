@@ -16,11 +16,19 @@
 		<div class="card-body">
 			Votre photo de profil sera visible par tous les autres membres de UnivShop !
 			<hr>
+			Votre photo de profil actuelle :
+
+			<div class="row">
+				<div class="col"> <img class="img-thumbnail" height="200px" width="200px" src="<?php echo img_profil($this->session->photo) ?>"></div>
+			</div>
+
+			<br>
+
 			<form enctype="multipart/form-data" action="" method="post">
 			<div class="input-group">
 				<div class="custom-file">
 					<input type="file" class="custom-file-input" id="photoInput" name="photo">
-					<label class="custom-file-label" for="photoInput">Choisir un fichier</label>
+					<label class="custom-file-label" for="photoInput">Changer de photo de profil</label>
 				</div>
 				<input type="hidden" name="case" value="photo">
 				<div class="input-group-append">
