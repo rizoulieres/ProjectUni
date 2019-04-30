@@ -32,6 +32,14 @@ if ( ! function_exists('img_profil'))
 	}
 }
 
+if ( ! function_exists('img_manuel'))
+{
+	function img_manuel($nom)
+	{
+		return base_url() . 'uploads/manuel/' . $nom;
+	}
+}
+
 if ( ! function_exists('img'))
 {
 	function img($nom, $alt = '')
@@ -46,4 +54,17 @@ if ( ! function_exists('vendor_url'))
 	{
 		return base_url() . 'assets/vendor/' . $nom;
 	}
+}
+
+
+function genererChaineAleatoire($longueur = 10)
+{
+	$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$longueurMax = strlen($caracteres);
+	$chaineAleatoire = '';
+	for ($i = 0; $i < $longueur; $i++)
+	{
+		$chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+	}
+	return $chaineAleatoire;
 }
