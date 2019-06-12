@@ -16,8 +16,34 @@ class CoursModel extends CI_Model {
 	}
 
 	public function getAllProfByMat($id_mat){
-		$query = $this->db->select('*')->from('annonce_cours')->where('id_matiere',$id_mat)->get();
+
+		$this->db->select('*');
+		$this->db->from('annonce_cours');
+		$this->db->join('user', 'user.id_user = annonce_cours.id_prof');
+		$this->db->where('id_matiere',$id_mat);
+		$query = $this->db->get();
 
 		return $query->result();
+	}
+
+	public function annonce($titre,$prix,$id_prof,$id_matiere,$description,$lundi,$mardi,$mercredi,$jeudi,$vendredi,$samedi,$dimanche){
+
+		$data = array(
+			'titre' => $titre,
+			'prix' => $prix,
+			'id_prof' => $id_prof,
+			'id_matiere' => $id_matiere,
+			'description' => $description,
+			'lundi' => $lundi,
+			'mardi' => $mardi,
+			'mercredi' => $mercredi,
+			'jeudi' => $jeudi,
+			'vendredi' => $vendredi,
+			'samedi' => $samedi,
+			'dimanche' => $dimanche
+
+		);
+
+		$this->db->insert('annonce_cours', $data);
 	}
 }
