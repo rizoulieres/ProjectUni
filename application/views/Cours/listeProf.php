@@ -11,7 +11,7 @@
 			<div class="card-header col-12 text-xl-center"><?php echo $value->titre ?></div>
 			<div class="card-body">
 				<div>
-					<a class="btn btn-outline-success col-12" href="#" role="button">Réserver un créneau</a>
+					<a class="btn btn-outline-success col-12" href="<?php echo site_url('Cours/reserver/'.$value->id_cours) ?>" role="button">Réserver un créneau</a>
 				</div>
 				<div>
 					<div class="col-12"><hr></div>

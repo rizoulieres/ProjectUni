@@ -213,4 +213,52 @@ class Cours extends CI_Controller {
 		}
 
 	}
+
+	public function reserver($id){
+		$this->load->model('CoursModel');
+		$data = array();
+
+
+		if($_POST){
+			$date = $titre = $this->input->post('date');
+			$heure = $titre = $this->input->post('heure');
+			$id_eleve = $titre = $this->session->id;
+
+			$this->CoursModel->propo($id,$id_eleve,$date,$heure,FALSE,TRUE);
+			//redirect('/Welcome/connexion', 'refresh');
+
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['info'] = $this->CoursModel->getCoursById($id);
+			$data['mat'] = $this->CoursModel->getMatAnnonce($id);
+			$this->layout->set_titre('Cours de '.$data['mat']);
+
+			$this->layout->ajouter_js('calendar');
+			$this->layout->view('Cours/infosReserv',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+	public function proposition(){
+		$this->load->model('CoursModel');
+		$data = array();
+
+
+		if ($this->session->has_userdata('id')) {
+			$data['liste'] = $this->CoursModel->getAllPropoProf($this->session->id);
+			$this->layout->set_titre('Liste des propositions');
+
+			$this->layout->view('Cours/listePropProf',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
 }
