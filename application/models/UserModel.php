@@ -137,4 +137,25 @@ class UserModel extends CI_Model {
 		$this->db->where('id_user', $id);
 		$this->db->update('user', $data);
 	}
+
+	public function noter($note,$type,$notee,$noteur,$desc){
+		$data = array(
+			'note' => $note,
+			'id_type' => $type,
+			'id_notee' => $notee,
+			'id_noteur' => $noteur,
+			'description' => $desc
+		);
+
+		$this->db->insert('notes', $data);
+	}
+
+	public function avg($id,$id_type){
+		$array = array('id_notee' => $id, 'id_type' => $id_type);
+		$query = $this->db->select_avg('note')->from('notes')->where($array)->get();
+
+		$query = $query->result();
+		return $query[0]->note;
+	}
+
 }

@@ -114,6 +114,10 @@ class Main extends CI_Controller
 			$user =$this->UserModel-> getUserById($id);
 			$data['user'] = $user;
 			$data['name_univ'] = $this->UserModel->getUnivById($user->id_univ);
+			$data['note_1'] = $this->UserModel->avg($id,1);
+			$data['note_2'] = $this->UserModel->avg($id,2);
+			$data['note_3'] = $this->UserModel->avg($id,3);
+			$data['note_4'] = $this->UserModel->avg($id,4);
 
 			$this->layout->set_titre($user->nom." ".$user->prenom);
 			$this->layout->view('Main/notes_profil', $data);
@@ -123,5 +127,107 @@ class Main extends CI_Controller
 			redirect('/Welcome/connexion', 'refresh');
 		}
 	}
+
+	public function noter_prof($id)
+	{
+		$this->load->model('UserModel');
+		$data = array();
+
+		if($_POST){
+			$note = $this->input->post('note');
+			$desc = $this->input->post('description');
+			$this->UserModel->noter($note,3,$id,$this->session->id,$desc);
+			redirect('/Main/note_prof/'.$id, 'refresh');
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['user'] =$this->UserModel->getUserById($id);
+			$data['metier'] = "Professeur";
+
+			$this->layout->set_titre("Noter un prof");
+			$this->layout->view('Main/note', $data);
+
+
+		} else {
+			redirect('/Welcome/connexion', 'refresh');
+		}
+	}
+
+	public function noter_elev($id)
+	{
+		$this->load->model('UserModel');
+		$data = array();
+
+		if($_POST){
+			$note = $this->input->post('note');
+			$desc = $this->input->post('description');
+			$this->UserModel->noter($note,4,$id,$this->session->id,$desc);
+			redirect('/Main/note_prof/'.$id, 'refresh');
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['user'] =$this->UserModel->getUserById($id);
+			$data['metier'] = "élève";
+
+			$this->layout->set_titre("Noter un élève");
+			$this->layout->view('Main/note', $data);
+
+
+		} else {
+			redirect('/Welcome/connexion', 'refresh');
+		}
+	}
+
+	public function noter_vendeur($id)
+	{
+		$this->load->model('UserModel');
+		$data = array();
+
+		if($_POST){
+			$note = $this->input->post('note');
+			$desc = $this->input->post('description');
+			$this->UserModel->noter($note,1,$id,$this->session->id,$desc);
+			redirect('/Main/note_prof/'.$id, 'refresh');
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['user'] =$this->UserModel->getUserById($id);
+			$data['metier'] = "vendeur";
+
+			$this->layout->set_titre("Noter un vendeur");
+			$this->layout->view('Main/note', $data);
+
+
+		} else {
+			redirect('/Welcome/connexion', 'refresh');
+		}
+	}
+
+	public function noter_acheteur($id)
+	{
+		$this->load->model('UserModel');
+		$data = array();
+
+		if($_POST){
+			$note = $this->input->post('note');
+			$desc = $this->input->post('description');
+			$this->UserModel->noter($note,2,$id,$this->session->id,$desc);
+			redirect('/Main/note_prof/'.$id, 'refresh');
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['user'] =$this->UserModel->getUserById($id);
+			$data['metier'] = "acheteur";
+
+			$this->layout->set_titre("Noter un acheteur");
+			$this->layout->view('Main/note', $data);
+
+
+		} else {
+			redirect('/Welcome/connexion', 'refresh');
+		}
+	}
+
+
 
 }
