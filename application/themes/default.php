@@ -13,6 +13,11 @@
 
 	<!-- Custom styles for this template-->
 	<link href="<?php echo css_url("sb-admin-2.min") ?>" rel="stylesheet">
+	<link href="<?php echo calendar_url('core/main.css') ?>" rel="stylesheet">
+	<link href="<?php echo calendar_url('daygrid/main.css') ?>" rel="stylesheet">
+	<link href="<?php echo calendar_url('timegrid/main.css') ?>" rel="stylesheet">
+
+
 
 </head>
 
@@ -93,11 +98,13 @@
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReserv" aria-expanded="true" aria-controls="collapseReserv">
 				<i class="fas fa-fw fa-book-reader"></i>
-				<span>Réserver</span>
+				<span>Elève</span>
 			</a>
 			<div id="collapseReserv" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="<?php echo site_url('Cours/listeMat') ?>">Un cours</a>
+					<a class="collapse-item" href="<?php echo site_url('Cours/listeMat') ?>">Réserver un cours</a>
+					<a class="collapse-item" href="<?php echo site_url('Cours/propositionEleve') ?>">En attente de validation</a>
+					<a class="collapse-item" href="<?php echo site_url('Cours/planningElev') ?>">Mes prochains cours</a>
 
 				</div>
 			</div>
@@ -107,13 +114,15 @@
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
 				<i class="fas fa-fw fa-book-reader"></i>
-				<span>Proposer</span>
+				<span>Professeur</span>
 			</a>
 			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 
 					<a class="collapse-item" href="<?php echo site_url('Cours/listeMatProp') ?>">Un cours</a>
 					<a class="collapse-item" href="<?php echo site_url('Cours/listeCoursProf') ?>">Mes annonces</a>
+					<a class="collapse-item" href="<?php echo site_url('Cours/proposition') ?>">En attente de validation</a>
+					<a class="collapse-item" href="<?php echo site_url('Cours/planningProf') ?>">Mes prochains cours</a>
 
 
 				</div>
@@ -289,6 +298,11 @@
 <?php foreach($js as $url): ?>
 	<script type="text/javascript" src="<?php echo $url; ?>"></script>
 <?php endforeach; ?>
+
+	<script src=<?php echo calendar_url('core/main.js') ?>></script>
+	<script src=<?php echo calendar_url('daygrid/main.js') ?>></script>
+	<script src=<?php echo calendar_url('timegrid/main.js') ?>></script>
+
 
 </body>
 

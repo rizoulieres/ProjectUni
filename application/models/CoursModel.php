@@ -117,7 +117,7 @@ class CoursModel extends CI_Model {
 		return $query[0];
 	}
 
-	public function propo($id_cours,$id_eleve,$date,$heure,$prof,$eleve){
+	public function propo($id_cours,$id_eleve,$date,$heure,$prof,$eleve,$nb){
 
 		$data = array(
 			'id_cours' => $id_cours,
@@ -125,7 +125,8 @@ class CoursModel extends CI_Model {
 			'date' => $date,
 			'heure' => $heure,
 			'eleve' => $eleve,
-			'prof' => $prof
+			'prof' => $prof,
+			'nb_heure' => $nb
 
 		);
 
@@ -133,12 +134,35 @@ class CoursModel extends CI_Model {
 	}
 
 	public function getAllPropoProf($id_prof){
+		$date =  date('Y-m-d', strtotime('-4 days'));
 		$this->db->select('*');
 		$this->db->from('cours_valide');
 		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'cours_valide.id_eleve = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
 		$this->db->where('id_prof',$id_prof);
 		$this->db->where('prof',FALSE);
 		$this->db->where('eleve',TRUE);
+		$this->db->where('date>',$date);
+
+		$query = $this->db->get();
+
+		return $query->result();
+
+	}
+
+	public function getAllPropoEnProf($id_prof){
+		$date =  date('Y-m-d', strtotime('-4 days'));
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'cours_valide.id_eleve = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
+		$this->db->where('id_prof',$id_prof);
+		$this->db->where('prof',TRUE);
+		$this->db->where('eleve',FALSE);
+		$this->db->where('date>',$date);
+
 		$query = $this->db->get();
 
 		return $query->result();
@@ -146,6 +170,121 @@ class CoursModel extends CI_Model {
 	}
 
 	public function getAllCoursValideProf($id_prof){
+		$date =  date('Y-m-d', strtotime('-4 days'));
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'cours_valide.id_eleve = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
+		$this->db->where('id_prof',$id_prof);
+		$this->db->where('prof',TRUE);
+		$this->db->where('eleve',TRUE);
+		$this->db->where('date>',$date);
+		$query = $this->db->get();
+
+		return $query->result();
+
+	}
+
+	public function getAllPropoEleve($id_eleve){
+		$date =  date('Y-m-d', strtotime('-4 days'));
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'annonce_cours.id_prof = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
+		$this->db->where('id_eleve',$id_eleve);
+		$this->db->where('prof',TRUE);
+		$this->db->where('eleve',FALSE);
+		$this->db->where('date>',$date);
+		$query = $this->db->get();
+
+		return $query->result();
+
+	}
+
+	public function getAllPropoEnEleve($id_eleve){
+		$date =  date('Y-m-d', strtotime('-4 days'));
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'annonce_cours.id_prof = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
+		$this->db->where('id_eleve',$id_eleve);
+		$this->db->where('eleve',TRUE);
+		$this->db->where('prof',FALSE);
+		$this->db->where('date>',$date);
+		$query = $this->db->get();
+
+		return $query->result();
+
+	}
+
+	public function getAllCoursValideEleve($id_eleve){
+		$date =  date('Y-m-d', strtotime('-4 days'));
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->join('user', 'annonce_cours.id_prof = user.id_user');
+		$this->db->join('matiere', 'annonce_cours.id_matiere = matiere.id_matiere');
+		$this->db->where('id_eleve',$id_eleve);
+		$this->db->where('prof',TRUE);
+		$this->db->where('eleve',TRUE);
+		$this->db->where('date>',$date);
+		$query = $this->db->get();
+
+		return $query->result();
+
+	}
+
+	public function getCoursValide($id){
+		$this->db->select('*');
+		$this->db->from('cours_valide');
+		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+		$this->db->where('id_cours_valide',$id);
+
+		$query = $this->db->get();
+
+		$query = $query->result();
+		return $query[0];
+
+
+	}
+
+	public function annuler($id_cours_valide,$profA,$eleveA){
+		$data = array(
+			'profA' => $profA,
+			'eleveA' => $eleveA
+		);
+
+		$this->db->where('id_cours_valide', $id_cours_valide);
+		$this->db->update('cours_valide', $data);
+	}
+
+	public function valider($id_cours_valide,$prof,$eleve){
+		$data = array(
+			'prof' => $prof,
+			'eleve' => $eleve
+		);
+
+		$this->db->where('id_cours_valide', $id_cours_valide);
+		$this->db->update('cours_valide', $data);
+	}
+
+
+	public function modifier($id_cours_valide,$prof,$eleve,$heure,$nb){
+		$data = array(
+			'prof' => $prof,
+			'eleve' => $eleve,
+			'heure' => $heure,
+			'nb_heure' => $nb
+		);
+
+		$this->db->where('id_cours_valide', $id_cours_valide);
+		$this->db->update('cours_valide', $data);
+	}
+
+	public function getAllCoursValideProfA($id_prof){
 		$this->db->select('*');
 		$this->db->from('cours_valide');
 		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
@@ -158,20 +297,7 @@ class CoursModel extends CI_Model {
 
 	}
 
-	public function getAllPropoEleve($id_eleve){
-		$this->db->select('*');
-		$this->db->from('cours_valide');
-		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
-		$this->db->where('id_eleve',$id_eleve);
-		$this->db->where('prof',TRUE);
-		$this->db->where('eleve',FALSE);
-		$query = $this->db->get();
-
-		return $query->result();
-
-	}
-
-	public function getAllCoursValideEleve($id_eleve){
+	public function getAllCoursValideEleveA($id_eleve){
 		$this->db->select('*');
 		$this->db->from('cours_valide');
 		$this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
@@ -183,6 +309,4 @@ class CoursModel extends CI_Model {
 		return $query->result();
 
 	}
-
-
 }

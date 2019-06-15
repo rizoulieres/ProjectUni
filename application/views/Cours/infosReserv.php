@@ -56,8 +56,13 @@
 		<?php if($info->samedi) { ?><span class="badge badge-pill badge-info mr-4">Samedi</span><?php } ?>
 		<?php if($info->dimanche) { ?><span class="badge badge-pill badge-dark mr-4">Dimanche</span><?php } ?>
 
-		<div class="col-12 mt-4"><p>Date: <input type="date" name="date" required id="datepicker"> et Heure : <input type="time" required name="heure" id="time"></p></div>
+		<?php
+		$date =  date('Y-m-d', strtotime('+2 days'));
 
+		?>
+
+		<div class="col-12 mt-4"><p>Date: <input min="<?php echo $date ?>" type="date" name="date" required id="datepicker"> et Heure : <input type="time" required name="heure" min="08:00" max="21:00" id="time"></p></div>
+		<div class="col-12 mb-3">Nombre d'heure : <input required name="nb" type="number" min="1" max="5"></div>
 		<div class="col-12 mb-3"><hr></div>
 
 		<div class="col-12 mb-3">

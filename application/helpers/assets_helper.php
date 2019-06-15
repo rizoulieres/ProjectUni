@@ -16,6 +16,14 @@ if ( ! function_exists('js_url'))
 	}
 }
 
+if ( ! function_exists('calendar_url'))
+{
+	function calendar_url($nom)
+	{
+		return base_url() . 'assets/fullcalendar/' . $nom;
+	}
+}
+
 if ( ! function_exists('img_url'))
 {
 	function img_url($nom)

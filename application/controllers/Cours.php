@@ -222,9 +222,10 @@ class Cours extends CI_Controller {
 		if($_POST){
 			$date = $titre = $this->input->post('date');
 			$heure = $titre = $this->input->post('heure');
+			$nb = $titre = $this->input->post('nb');
 			$id_eleve = $titre = $this->session->id;
 
-			$this->CoursModel->propo($id,$id_eleve,$date,$heure,FALSE,TRUE);
+			$this->CoursModel->propo($id,$id_eleve,$date,$heure,FALSE,TRUE,$nb);
 			//redirect('/Welcome/connexion', 'refresh');
 
 		}
@@ -251,6 +252,7 @@ class Cours extends CI_Controller {
 
 		if ($this->session->has_userdata('id')) {
 			$data['liste'] = $this->CoursModel->getAllPropoProf($this->session->id);
+			$data['liste2'] = $this->CoursModel->getAllPropoEnProf($this->session->id);
 			$this->layout->set_titre('Liste des propositions');
 
 			$this->layout->view('Cours/listePropProf',$data);
@@ -261,4 +263,202 @@ class Cours extends CI_Controller {
 		}
 
 	}
+
+	public function propositionEleve(){
+		$this->load->model('CoursModel');
+		$data = array();
+
+
+		if ($this->session->has_userdata('id')) {
+			$data['liste'] = $this->CoursModel->getAllPropoEleve($this->session->id);
+			$data['liste2'] = $this->CoursModel->getAllPropoEnEleve($this->session->id);
+			$this->layout->set_titre('Liste des propositions');
+
+			$this->layout->view('Cours/listePropElev',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+
+	public function planningProf(){
+		$this->load->model('CoursModel');
+		$data = array();
+
+
+		if ($this->session->has_userdata('id')) {
+			$data['liste'] = $this->CoursModel->getAllCoursValideProf($this->session->id);
+			$this->layout->set_titre('Planning Professeur');
+			$data['id_prof'] = $this->session->id;
+			$this->layout->ajouter_js('planningProf');
+			$this->layout->view('Cours/planningProf',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+	public function planningElev(){
+		$this->load->model('CoursModel');
+		$data = array();
+
+
+		if ($this->session->has_userdata('id')) {
+			$data['liste'] = $this->CoursModel->getAllCoursValideEleve($this->session->id);
+			$data['id_eleve'] = $this->session->id;
+			$this->layout->set_titre('Planning Professeur');
+			$this->layout->ajouter_js('planningEleve');
+			$this->layout->view('Cours/planningElev',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+	public function annuler($id_cours){
+		$this->load->model('CoursModel');
+
+
+		if ($this->session->has_userdata('id')) {
+			$info = $this->CoursModel->getCoursValide($id_cours);
+			if($this->session->id == $info->id_prof){
+				$this->CoursModel->annuler($id_cours,TRUE,FALSE);
+				header ("Location: $_SERVER[HTTP_REFERER]" );
+			}
+			if($this->session->id == $info->id_eleve){
+				$this->CoursModel->annuler($id_cours,FALSE,TRUE);
+				header ("Location: $_SERVER[HTTP_REFERER]" );
+			}
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+
+	public function valider($id_cours){
+		$this->load->model('CoursModel');
+
+
+		if ($this->session->has_userdata('id')) {
+			$info = $this->CoursModel->getCoursValide($id_cours);
+			if($this->session->id == $info->id_prof){
+				$this->CoursModel->valider($id_cours,TRUE,TRUE);
+				redirect('/Cours/planningProf', 'refresh');
+			}
+			if($this->session->id == $info->id_eleve){
+				$this->CoursModel->valider($id_cours,TRUE,TRUE);
+				redirect('/Cours/planningElev', 'refresh');
+			}
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+
+	public function modif($id_cours){
+		$this->load->model('CoursModel');
+		$data = array();
+		$info = $this->CoursModel->getCoursValide($id_cours);
+
+		if($_POST){
+
+			$heure = $titre = $this->input->post('heure');
+			$nb = $titre = $this->input->post('nb');
+
+			if($this->session->id == $info->id_prof){
+				$this->CoursModel->modifier($id_cours,TRUE,FALSE,$heure,$nb);
+				redirect('/Cours/proposition', 'refresh');
+			}
+			if($this->session->id == $info->id_eleve){
+				$this->CoursModel->modifier($id_cours,FALSE,TRUE,$heure,$nb);
+				redirect('/Cours/propositionEleve', 'refresh');
+			}
+
+		}
+
+		if ($this->session->has_userdata('id')) {
+			$data['info'] = $info;
+
+			$this->layout->set_titre('Proposer un nouveaux crénaux');
+
+			$this->layout->view('Cours/horaireModif',$data);
+
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+	//Serveur pour requete AJAX
+	public function getAllRDVProf($id){
+		$this->load->model('CoursModel');
+		$this->load->model('UserModel');
+
+		$all= $this->CoursModel->getAllCoursValideProfA($id);
+		$tab = array();
+		$compteur=0;
+
+		foreach ($all as $value){
+			$eleve = $this->UserModel->getUserById($value->id_eleve);
+			$tab[$compteur]['id'] = $value->id_cours_valide;
+			$tab[$compteur]['title'] = "Cours avec ".$eleve->prenom." ".$eleve->nom;
+			$tab[$compteur]['start'] = $value->date.'T'.$value->heure;
+			$timestamp = strtotime($value->heure) + $value->nb_heure*3600;
+
+			$time = date('H:i:s', $timestamp);
+			$tab[$compteur]['end'] = $value->date.'T'.$time;
+
+			$compteur++;
+
+
+		}
+
+
+		echo json_encode($tab);
+
+
+	}
+
+
+	//Serveur pour requete AJAX
+	public function getAllRDVElev($id){
+		$this->load->model('CoursModel');
+		$this->load->model('UserModel');
+		$all= $this->CoursModel-> getAllCoursValideEleveA($id);
+		$tab = array();
+		$compteur=0;
+
+		foreach ($all as $value){
+			$prof = $this->UserModel->getUserById($value->id_prof);
+			$tab[$compteur]['id'] = $value->id_cours_valide;
+			$tab[$compteur]['title'] = "Cours avec ".$prof->prenom." ".$prof->nom;
+			$tab[$compteur]['start'] = $value->date.'T'.$value->heure;
+			$timestamp = strtotime($value->heure) + $value->nb_heure*3600;
+
+			$time = date('H:i:s', $timestamp);
+			$tab[$compteur]['end'] = $value->date.'T'.$time;
+
+			$compteur++;
+
+
+		}
+
+
+		echo json_encode($tab);
+
+
+	}
+
+
 }
