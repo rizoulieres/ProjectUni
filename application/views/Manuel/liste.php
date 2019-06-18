@@ -35,23 +35,23 @@ foreach ($liste as $id => $value) {
 		<div class="modal fade" id="exampleModal<?php echo $value->id_support ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Détails du support</h5>
+		      <div class="modal-header text-light bg-primary">
+		        <h5 class="modal-title  " id="exampleModalLabel">Détails du support</h5>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
-		      <div class="modal-body col-6">
+		      <div class="modal-body">
 		        <?php 
-		        	echo "Titre : ".$value->titre."<br>";
-		        	echo "Auteur: ".$value->auteur."<br>";
-		        	echo "Editeur: ".$value->editeur."<br>";
-		        	echo "Année de parution: ".$value->annee_edition."<br>";
-		        	echo "Description :".$value->description."<br>";
+		        	echo "<p>Titre : ".$value->titre."</p><br>";
+		        	echo "<p>Auteur: ".$value->auteur."</p><br>";
+		        	echo "<p>Editeur: ".$value->editeur."</p><br>";
+		        	echo "<p>Année de parution: ".$value->annee_edition."</p><br>";
+		        	echo "<p>Description :".$value->description."</p><br>";
 		        	//echo img_manuel($value->image);
 		        ?>
 		      </div >
-		      <div class="modal-footer">
+		      <div class="modal-footer bg-light">
 		      	Copyright © UnivShop 2019
 		      </div>
 		    </div>
