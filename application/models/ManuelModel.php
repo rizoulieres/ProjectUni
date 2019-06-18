@@ -60,5 +60,4 @@ class ManuelModel extends CI_Model {
 		return $query->result();
 	}
 
-
 }
