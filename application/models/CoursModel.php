@@ -2,6 +2,7 @@
 
 class CoursModel extends CI_Model {
 
+
 	public function getAllMat(){
 		$query = $this->db->select('*')->from('matiere')->get();
 
@@ -291,6 +292,8 @@ class CoursModel extends CI_Model {
 		$this->db->where('id_prof',$id_prof);
 		$this->db->where('prof',TRUE);
 		$this->db->where('eleve',TRUE);
+		$this->db->where('profA',FALSE);
+		$this->db->where('eleveA',FALSE);
 		$query = $this->db->get();
 
 		return $query->result();
@@ -304,6 +307,8 @@ class CoursModel extends CI_Model {
 		$this->db->where('id_eleve',$id_eleve);
 		$this->db->where('prof',TRUE);
 		$this->db->where('eleve',TRUE);
+		$this->db->where('profA',FALSE);
+		$this->db->where('eleveA',FALSE);
 		$query = $this->db->get();
 
 		return $query->result();
