@@ -30,7 +30,7 @@
 				</a></td>
 			<td><?php echo $value->date ?></td>
 			<td><?php echo $value->heure ?></td>
-			<?php if((!$value->eleveA) && (!$value->profA) && ($date<$value->date))  {?>
+			<?php if((!$value->eleveA) && (!$value->profA) && ($date<=$value->date))  {?>
 				<td><a href="<?php echo site_url('Cours/annuler/'.$value->id_cours_valide) ?>" class="btn btn-danger btn-circle"><i class="fas fa-ban"></i></a><a href="mailto:<?php echo $value->mail ?>" class="btn btn-success btn-circle"><i class="fas fa-paper-plane"></i></a></td>
 			<?php } ?>
 			<?php if(($value->eleveA)) {?>
@@ -39,7 +39,7 @@
 			<?php if(($value->profA)) {?>
 				<td>Le professeur à annulé ce cours</td>
 			<?php } ?>
-			<?php if((!$date<$value->date)) {?>
+			<?php if(($date>=$value->date)) {?>
 				<td>Vous ne pouvez plus annulé <a href="mailto:<?php echo $value->mail ?>" class="btn btn-success btn-circle"><i class="fas fa-paper-plane"></i></a></td>
 			<?php } ?>
 
