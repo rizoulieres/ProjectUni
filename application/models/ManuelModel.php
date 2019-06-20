@@ -60,6 +60,11 @@ class ManuelModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function changeEtatManuel($id_support){
+         $this->db->set('id_etat', '3', FALSE);
+         $this->db->where('id_support',$id_support);
+         $this->db->update('support');
+    }
 	/*public function getManuelById($id){
 	    $query = $this->db->select('*')->from('support', 'matiere')->get();
         $this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');

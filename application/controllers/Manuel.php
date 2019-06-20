@@ -79,4 +79,8 @@ class Manuel extends CI_Controller {
 		}
 
 	}
+
+	public function reserver(){
+
+    }
 }
