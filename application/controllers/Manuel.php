@@ -82,7 +82,6 @@ class Manuel extends CI_Controller {
 
 	public function reserver($id_support){
 	    $this->load->model('ManuelModel');
-	    $data = array();
 
         if ($this->session->has_userdata('id')) {
             $data['id_support'] = $this->ManuelModel->changeEtatManuel($id_support);
