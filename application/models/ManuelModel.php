@@ -60,5 +60,13 @@ class ManuelModel extends CI_Model {
 		return $query->result();
 	}
 
+	/*public function getManuelById($id){
+	    $query = $this->db->select('*')->from('support', 'matiere')->get();
+        $this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
+        $this->db->where('id_support',$id);
+        support as s,matiere as m WHERE id_support = 3 and s.id_matiere = m.id_matiere
+
+	    return $query->result();
+    }*/
 
 }
