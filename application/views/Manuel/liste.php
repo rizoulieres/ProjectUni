@@ -24,7 +24,7 @@ foreach ($liste as $id => $value) {
 				<div class="col-6 mb-3">
 					<div class="row justify-content-center">
 						<div class="col-12 mb-4 text-center" ><a class="col-12 btn btn-warning text-white" data-toggle="modal" data-target="#exampleModal<?php echo $value->id_support ?>" href="">Détails</a></div>
-						<div class="col-12 mb-4 text-center"><a href="" class="col-12 btn btn-danger text-white">Réserver</a></div>
+						<div class="col-12 mb-4 text-center"><a href="<?php echo site_url('Manuel/reserver/'.$value->id_support) ?>" class="col-12 btn btn-danger text-white">Réserver</a></div>
 						<div class="col-12 align-center text-center"><b><?php echo $value->prix ?> € </b></div>
 					</div>
 				</div>
