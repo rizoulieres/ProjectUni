@@ -149,4 +149,21 @@ class Manuel extends CI_Controller {
 		}
 
 	}
+
+
+	public function supp($id){
+		$this->load->model('ManuelModel');
+
+		if ($this->session->has_userdata('id')) {
+
+			$this->ManuelModel->supp($id);
+			redirect('/Manuel/listeMesManuels', 'refresh');
+
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+
+	}
+
+
 }
