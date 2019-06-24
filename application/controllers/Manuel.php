@@ -112,6 +112,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+    public function valider($id_support){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+
+            $this->ManuelModel->valider($id_support);
+            redirect('/Manuel/Listereserver', 'refresh');
+        }else{
+            redirect('/Welcome/connexion', 'refresh');
+        }
+    }
 
 
 	public function listeMesManuels(){
