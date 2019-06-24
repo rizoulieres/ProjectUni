@@ -111,16 +111,6 @@ class Manuel extends CI_Controller {
         }
     }
 
-
-    public function ListeAcheter(){
-        $this->load->model('ManuelModel');
-        if ($this->session->has_userdata('id')) {
-            $data['liste'] = $this->ManuelModel->afficherManuelAcheter($this->session->id);
-            $this->layout->set_titre('Liste manuels Acheter');
-            $this->layout->view('Manuel/listeDesManuelsAchete',$data);
-        }
-    }
-
     public function annuler($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
@@ -135,7 +125,7 @@ class Manuel extends CI_Controller {
     public function valider($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
-            $data['liste'] = $this->ManuelModel->afficherManuelAcheter($this->session->id);
+
             $this->ManuelModel->valider($id_support);
             redirect('/Manuel/Listereserver', 'refresh');
         }else{
