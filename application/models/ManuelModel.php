@@ -55,7 +55,7 @@ class ManuelModel extends CI_Model {
 
 
 	public function getListeManuelDispo(){
-		$query = $this->db->select('*')->from('support')->where('id_etat',1)->get();
+		$query = $this->db->select('*')->from('support')->where('id_etat',1)->where('id_vendeur!=',$this->session->id)->get();
 		return $query->result();
 	}
 
@@ -73,6 +73,16 @@ class ManuelModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function afficherManuelVendus($id_vendeur){
+        $this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_vendeur',$id_vendeur);
+		$this->db->where('id_etat',2);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 
     public function annuler($id_support){
         $this->db->set('id_etat', '1', FALSE);
@@ -98,7 +108,6 @@ class ManuelModel extends CI_Model {
 
         $this->db->update('support');
     }
-
 
 
 	public function getMesManuels($id_user){

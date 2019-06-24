@@ -44,11 +44,11 @@ class Manuel extends CI_Controller {
 			if($this->input->post('type') == 1){
 
 				$this->ManuelModel->venteManuel($titre,$prix,$this->session->id,$data['file'],$description,$anneeEdit,$editeur,$auteur,$theme);
-
+				redirect('/Manuel/listeMesManuels', 'refresh');
 			}elseif ($this->input->post('type')== 2){
 				$duree = $this->input->post('dureePret');
 				$this->ManuelModel->pretManuel($titre,$prix,$this->session->id,$data['file'],$description,$anneeEdit,$editeur,$auteur,$theme,$duree);
-
+				redirect('/Manuel/listeMesManuels', 'refresh');
 			}
 
 		}
@@ -85,7 +85,7 @@ class Manuel extends CI_Controller {
 
         if ($this->session->has_userdata('id')) {
             $data['id_support'] = $this->ManuelModel->reserver($id_support,$this->session->id);
-            redirect('/Manuel/liste', 'refresh');
+            redirect('/Manuel/Listereserver', 'refresh');
         }else {
             redirect('/Welcome/connexion', 'refresh');
         }
@@ -101,6 +101,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+
+    public function ListeVendus(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelVendus($this->session->id);
+            $this->layout->set_titre('Liste manuels Vendus');
+            $this->layout->view('Manuel/listeDesManuelsVendus',$data);
+        }
+    }
+
     public function annuler($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
@@ -112,6 +122,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+    public function valider($id_support){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+
+            $this->ManuelModel->valider($id_support);
+            redirect('/Manuel/Listereserver', 'refresh');
+        }else{
+            redirect('/Welcome/connexion', 'refresh');
+        }
+    }
 
 
 	public function listeMesManuels(){
