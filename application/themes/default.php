@@ -66,7 +66,6 @@
 					<h6 class="collapse-header">Custom Components:</h6>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/liste') ?>">Liste</a>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres réservés</a>
-                    <a class="collapse-item" href="<?php echo site_url('Manuel/ListeAcheter') ?>">Mes livres Achetés</a>
 				</div>
 			</div>
 		</li>
