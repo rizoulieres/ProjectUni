@@ -23,7 +23,7 @@ foreach ($liste as $id => $value) {
 				<img class="col-6 mb-3" height="150" width="150" src="<?php echo img_manuel($value->image) ?>">
 				<div class="col-6 mb-3">
 					<div class="row justify-content-center">
-						<div class="col-12 mb-4 text-center"><a href="" class="col-12 btn btn-warning text-white">Modifier</a></div>
+						<div class="col-12 mb-4 text-center"><a href="<?php echo site_url('Manuel/modif/'.$value->id_support) ?>" class="col-12 btn btn-warning text-white">Modifier</a></div>
 						<div class="col-12 mb-4 text-center"><a href="<?php echo site_url('Manuel/supp/'.$value->id_support) ?>" class="col-12 btn btn-danger text-white">Supprimer</a></div>
 						<div class="col-12 align-center text-center"><b><?php echo $value->prix ?> € </b></div>
 					</div>
