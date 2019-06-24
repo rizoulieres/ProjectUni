@@ -38,7 +38,7 @@
 			<?php if(($value->profA)) {?>
 				<td>Vous avez annulé ce cours <a href="mailto:<?php echo $value->mail ?>" class="btn btn-success btn-circle"><i class="fas fa-paper-plane"></i></a></td>
 			<?php } ?>
-			<?php if((!$date<$value->date)) {?>
+			<?php if(($date>=$value->date)) {?>
 				<td>Vous ne pouvez plus annulé <a href="mailto:<?php echo $value->mail ?>" class="btn btn-success btn-circle"><i class="fas fa-paper-plane"></i></a></td>
 			<?php } ?>
 		</tr>
