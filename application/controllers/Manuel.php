@@ -101,6 +101,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+
+    public function ListeVendus(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelVendus($this->session->id);
+            $this->layout->set_titre('Liste manuels Vendus');
+            $this->layout->view('Manuel/listeDesManuelsVendus',$data);
+        }
+    }
+
     public function annuler($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
@@ -112,6 +122,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+    public function valider($id_support){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+
+            $this->ManuelModel->valider($id_support);
+            redirect('/Manuel/Listereserver', 'refresh');
+        }else{
+            redirect('/Welcome/connexion', 'refresh');
+        }
+    }
 
 
 	public function listeMesManuels(){
