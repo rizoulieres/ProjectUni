@@ -101,4 +101,17 @@ class ManuelModel extends CI_Model {
 
 
 
+	public function getMesManuels($id_user){
+		$this->db->select('*');
+		$this->db->from('support');
+		$this->db->where('id_vendeur',$id_user);
+		$this->db->where('id_etat',1);
+		$query = $this->db->get();
+
+		return $query->result();
+	}
+
+
+
+
 }
