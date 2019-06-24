@@ -101,6 +101,16 @@ class Manuel extends CI_Controller {
         }
     }
 
+
+    public function ListeVendus(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelVendus($this->session->id);
+            $this->layout->set_titre('Liste manuels Vendus');
+            $this->layout->view('Manuel/listeDesManuelsVendus',$data);
+        }
+    }
+
     public function annuler($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {

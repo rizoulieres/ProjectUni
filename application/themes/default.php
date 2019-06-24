@@ -79,8 +79,8 @@
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="<?php echo site_url('Manuel/vendre') ?>">Vendre un manuel</a>
-					<a class="collapse-item" href="<?php echo site_url('Manuel/listeMesManuels  ') ?>">Mes manuels en ventes</a>
-					<a class="collapse-item" href="#">Mes manuels vendu</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/listeMesManuels') ?>">Mes manuels en ventes</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/ListeVendus') ?>">Mes manuels vendu</a>
 
 				</div>
 			</div>

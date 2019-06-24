@@ -74,6 +74,15 @@ class ManuelModel extends CI_Model {
         return $query->result();
     }
 
+    public function afficherManuelVendus($id_vendeur){
+        $this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_vendeur',$id_vendeur);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
     public function annuler($id_support){
         $this->db->set('id_etat', '1', FALSE);
         $this->db->set('id_acheteur',NULL);
