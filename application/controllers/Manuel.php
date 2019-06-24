@@ -80,6 +80,39 @@ class Manuel extends CI_Controller {
 
 	}
 
+	public function reserver($id_support){
+	    $this->load->model('ManuelModel');
+
+        if ($this->session->has_userdata('id')) {
+            $data['id_support'] = $this->ManuelModel->reserver($id_support,$this->session->id);
+            redirect('/Manuel/liste', 'refresh');
+        }else {
+            redirect('/Welcome/connexion', 'refresh');
+        }
+
+    }
+
+    public function Listereserver(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelReserve($this->session->id);
+            $this->layout->set_titre('Liste manuels reservé');
+            $this->layout->view('Manuel/reserve',$data);
+        }
+    }
+
+    public function annuler($id_support){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            
+                $this->ManuelModel->annuler($id_support);
+            redirect('/Manuel/Listereserver', 'refresh');
+        }else{
+            redirect('/Welcome/connexion', 'refresh');
+        }
+    }
+
+
 
 	public function listeMesManuels(){
 		$this->load->model('ManuelModel');

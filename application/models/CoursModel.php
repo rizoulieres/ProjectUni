@@ -1,6 +1,6 @@
 <?php
 
-class CoursModel extends CI_Model {
+    class CoursModel extends CI_Model {
 
 
 	public function getAllMat(){

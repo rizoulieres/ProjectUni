@@ -56,9 +56,49 @@ class ManuelModel extends CI_Model {
 
 	public function getListeManuelDispo(){
 		$query = $this->db->select('*')->from('support')->where('id_etat',1)->get();
-
 		return $query->result();
 	}
+
+	public function reserver($id_support,$id_acheteur){
+         $this->db->set('id_etat', '3', FALSE);
+         $this->db->set('id_acheteur', $id_acheteur, FALSE);
+         $this->db->where('id_support',$id_support);
+         $this->db->update('support');
+    }
+
+    public function afficherManuelReserve($id_user){
+        $this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_acheteur',$id_user);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function annuler($id_support){
+        $this->db->set('id_etat', '1', FALSE);
+        $this->db->set('id_acheteur',NULL);
+        $this->db->where('id_support',$id_support);
+        $this->db->update('support');
+    }
+
+    public function annulerPret($id_support){
+        $this->db->set('id_etat', '1', FALSE);
+        $this->db->set('id_acheteur',NULL);
+        $this->db->set('duree_pret',NULL);
+        $this->db->set('date_pret','0000-00-00');
+        $this->db->set('date_retour','0000-00-00');
+        $this->db->where('id_support',$id_support);
+        $this->db->update('support');
+    }
+
+    public function valider($id_support){
+        $this->db->set('id_etat', '2', FALSE);
+        $this->db->set('id_acheteur',NULL);
+        $this->db->where('id_support',$id_support);
+
+        $this->db->update('support');
+    }
+
 
 
 	public function getMesManuels($id_user){
