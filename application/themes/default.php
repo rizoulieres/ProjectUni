@@ -64,7 +64,8 @@
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="<?php echo site_url('Manuel/liste') ?>">Liste</a>
-					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres réservés</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres empruntés</a>
+                    <a class="collapse-item" href="<?php echo site_url('Manuel/ListeAcheter') ?>">Mes livres Achetés</a>
 				</div>
 			</div>
 		</li>

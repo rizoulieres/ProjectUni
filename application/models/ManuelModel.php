@@ -70,6 +70,7 @@ class ManuelModel extends CI_Model {
         $this->db->select('*');
         $this->db->from('support');
         $this->db->where('id_acheteur',$id_user);
+        $this->db->where('id_etat',3);
         $query = $this->db->get();
         return $query->result();
     }
@@ -83,6 +84,14 @@ class ManuelModel extends CI_Model {
         return $query->result();
     }
 
+    public function afficherManuelAcheter($id_acheteur){
+        $this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_acheteur',$id_acheteur);
+        $this->db->where('id_etat',2);
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function annuler($id_support){
         $this->db->set('id_etat', '1', FALSE);
@@ -103,12 +112,10 @@ class ManuelModel extends CI_Model {
 
     public function valider($id_support){
         $this->db->set('id_etat', '2', FALSE);
-        $this->db->set('id_acheteur',NULL);
         $this->db->where('id_support',$id_support);
 
         $this->db->update('support');
     }
-
 
 	public function getMesManuels($id_user){
 		$this->db->select('*');
@@ -125,5 +132,12 @@ class ManuelModel extends CI_Model {
 		$this->db->delete('support');
 	}
 
+
+	public function getManuel($id){
+		$query = $this->db->select('*')->from('support')->where('id_support',$id)->get();
+
+		$query = $query->result();
+		return $query[0];
+	}
 
 }
