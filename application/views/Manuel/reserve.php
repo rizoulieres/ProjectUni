@@ -29,7 +29,7 @@
 
            <td>
                 <a href="<?php echo site_url('Manuel/annuler/'.$value->id_support) ?>" class="btn btn-danger btn-circle"><i class="fas fa-ban"></i></a>
-               <!-- <a href="<?php echo site_url('Cours/valider/'.$value->id_cours_valide) ?>" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>-->
+                <a href="<?php echo site_url('Manuel/valider/'.$value->id_support) ?>" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
             </td>
 
         </tr>

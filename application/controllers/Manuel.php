@@ -104,10 +104,13 @@ class Manuel extends CI_Controller {
     public function annuler($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
-            $data['id_support'] = $this->ManuelModel->annuler($id_support);
+            
+                $this->ManuelModel->annuler($id_support);
             redirect('/Manuel/Listereserver', 'refresh');
         }else{
             redirect('/Welcome/connexion', 'refresh');
         }
     }
+
+
 }
