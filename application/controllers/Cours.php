@@ -106,7 +106,7 @@ class Cours extends CI_Controller {
 			$data['mat'] = $this->CoursModel->getMatById($id_mat);
 			$this->layout->set_titre('Liste des matières');
 
-			$this->layout->view('Cours/formProp',$data);
+			$this->layout->view('Cours/planningElev',$data);
 
 		}else{
 			redirect('/Welcome/connexion', 'refresh');
@@ -226,7 +226,7 @@ class Cours extends CI_Controller {
 			$id_eleve = $titre = $this->session->id;
 
 			$this->CoursModel->propo($id,$id_eleve,$date,$heure,FALSE,TRUE,$nb);
-			//redirect('/Welcome/connexion', 'refresh');
+			redirect('/Cours/propositionEleve', 'refresh');
 
 		}
 
