@@ -78,13 +78,14 @@ class ManuelModel extends CI_Model {
         return $query->result();
     }
 
+    public function annuler($id_support){
+        $this->db->set('id_etat', '1', FALSE);
+        $this->db->set('id_acheteur',NULL);
+        $this->db->where('id_support',$id_support);
 
-	/*public function getManuelById($id){
-	    $query = $this->db->select('*')->from('support', 'matiere')->get();
-        $this->db->where('id_support',$id);
-        support as s,matiere as m WHERE id_support = 3 and s.id_matiere = m.id_matiere
+        $this->db->update('support');
+    }
 
-	    return $query->result();
-    }*/
+
 
 }
