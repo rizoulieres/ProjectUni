@@ -10,7 +10,11 @@ class Main extends CI_Controller
 		$data = array();
 
 		if ($this->session->has_userdata('id')) {
-
+			$this->load->model('AccModel');
+			$data['nb_v'] = $this->AccModel->getSupportVenduByUser($this->session->id);
+			$data['nb_a'] = $this->AccModel->getSupportAcheteByUser($this->session->id);
+			$data['nb_p'] = $this->AccModel->getCoursPrisByUser($this->session->id);
+			$data['nb_d'] = $this->AccModel->getCoursDonneeByUser($this->session->id);
 			$this->layout->set_titre('Accueil');
 			$this->layout->view('Main/accueil', $data);
 
