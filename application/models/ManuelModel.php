@@ -120,6 +120,11 @@ class ManuelModel extends CI_Model {
 		return $query->result();
 	}
 
+	public function supp($id){
+		$this->db->where('id_support', $id);
+		$this->db->delete('support');
+	}
+
 
 
 
