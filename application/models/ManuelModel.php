@@ -132,6 +132,55 @@ class ManuelModel extends CI_Model {
 		$this->db->delete('support');
 	}
 
+	public function getManuel($id){
+		$query = $this->db->select('*')->from('support')->where('id_support',$id)->get();
+
+		$query = $query->result();
+		return $query[0];
+	}
+
+	public function venteManuelUpdate($id,$titre,$prix,$image,$description,$annee_edition,$editeur,$auteur,$id_matiere){
+
+		$date = date("Y-m-d");
+
+		$data = array(
+			'titre' => $titre,
+			'prix' => $prix,
+			'id_type' => 1, //1 :Vente
+			'date_annonce' => $date,
+			'image' => $image,
+			'description' => $description,
+			'annee_edition' => $annee_edition,
+			'editeur' => $editeur,
+			'auteur' => $auteur,
+			'id_matiere' => $id_matiere
+		);
+		$this->db->where('id_support', $id);
+		$this->db->update('support', $data);
+	}
+
+	public function pretManuelUpdate($id,$titre,$prix,$image,$description,$annee_edition,$editeur,$auteur,$id_matiere,$duree){
+
+		$date = date("Y-m-d");
+
+		$data = array(
+			'titre' => $titre,
+			'prix' => $prix,
+			'id_type' => 2, //2 : Prêt
+			'date_annonce' => $date,
+			'image' => $image,
+			'description' => $description,
+			'annee_edition' => $annee_edition,
+			'editeur' => $editeur,
+			'auteur' => $auteur,
+			'id_matiere' => $id_matiere,
+			'duree_pret' => $duree
+		);
+
+		$this->db->where('id_support', $id);
+		$this->db->update('support', $data);
+	}
+
 
 	public function getManuel($id){
 		$query = $this->db->select('*')->from('support')->where('id_support',$id)->get();
