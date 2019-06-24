@@ -59,11 +59,10 @@
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-shopping-basket"></i>
-				<span>Acheter</span>
+				<span>Acheter | Emprunter</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Components:</h6>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/liste') ?>">Liste</a>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres réservés</a>
 				</div>

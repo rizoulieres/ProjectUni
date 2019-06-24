@@ -126,6 +126,4 @@ class ManuelModel extends CI_Model {
 	}
 
 
-
-
 }
