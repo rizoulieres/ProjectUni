@@ -181,12 +181,45 @@ class ManuelModel extends CI_Model {
 		$this->db->update('support', $data);
 	}
 
+	public function validerPret($id_support,$date_retour){
+		$date = date('Y-m-d');
+		$this->db->set('id_etat', '4');
+		$this->db->set('date_pret', $date);
+		$this->db->set('date_retour',$date_retour);
+		$this->db->where('id_support',$id_support);
 
-	public function getManuel($id){
-		$query = $this->db->select('*')->from('support')->where('id_support',$id)->get();
+		$this->db->update('support');
+	}
 
-		$query = $query->result();
-		return $query[0];
+	public function afficherManuelEmprunt($id_acheteur){
+		$this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_acheteur',$id_acheteur);
+        $this->db->where('id_etat',4);
+        $query = $this->db->get();
+        return $query->result();
+	}
+
+	public function afficherManuelPretes($id_vendeur){
+		$this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_vendeur',$id_vendeur);
+        $this->db->where('id_etat',4);
+        $query = $this->db->get();
+        return $query->result();
+	}
+
+	public function retourner($id_support){
+		$date = date('Y-m-d');
+		$this->db->set('id_etat', '1');
+		$this->db->set('date_pret', '0000-00-00');
+		$this->db->set('date_retour','0000-00-00');
+		$this->db->set('date_pret','0000-00-00');
+		$this->db->set('id_acheteur',NULL);
+		$this->db->set('date_annonce',$date);
+		$this->db->where('id_support',$id_support);
+
+		$this->db->update('support');
 	}
 
 }

@@ -84,8 +84,9 @@ class Manuel extends CI_Controller {
 	    $this->load->model('ManuelModel');
 
         if ($this->session->has_userdata('id')) {
-            $this->ManuelModel->reserver($id_support,$this->session->id);
-            redirect('/Manuel/Listereserver', 'refresh');
+       			$this->ManuelModel->reserver($id_support,$this->session->id);
+            	redirect('/Manuel/Listereserver', 'refresh');
+       		
         }else {
             redirect('/Welcome/connexion', 'refresh');
         }
@@ -101,6 +102,15 @@ class Manuel extends CI_Controller {
         }
     }
 
+    public function ListeEmprunt(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelEmprunt($this->session->id);
+            $this->layout->set_titre('Liste manuels empruntés');
+            $this->layout->view('Manuel/listeDesManuelsEmpruntes',$data);
+        }
+    }
+
 
     public function ListeVendus(){
         $this->load->model('ManuelModel');
@@ -108,6 +118,15 @@ class Manuel extends CI_Controller {
             $data['liste'] = $this->ManuelModel->afficherManuelVendus($this->session->id);
             $this->layout->set_titre('Liste manuels Vendus');
             $this->layout->view('Manuel/listeDesManuelsVendus',$data);
+        }
+    }
+
+    public function ListePretes(){
+        $this->load->model('ManuelModel');
+        if ($this->session->has_userdata('id')) {
+            $data['liste'] = $this->ManuelModel->afficherManuelPretes($this->session->id);
+            $this->layout->set_titre('Liste manuels Vendus');
+            $this->layout->view('Manuel/emprunts',$data);
         }
     }
 
@@ -135,10 +154,23 @@ class Manuel extends CI_Controller {
     public function valider($id_support){
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
-            $data['liste'] = $this->ManuelModel->afficherManuelAcheter($this->session->id);
-            $this->ManuelModel->valider($id_support);
-            redirect('/Manuel/Listereserver', 'refresh');
-        }else{
+               if ($this->ManuelModel->getManuel($id_support)->id_type == 1){
+            	$this->ManuelModel->valider($id_support);
+            	redirect('/Manuel/Listereserver', 'refresh');
+       		}
+       		else if ($this->ManuelModel->getManuel($id_support)->id_type == 2){
+       			$duree = $this->ManuelModel->getManuel($id_support)->duree_pret;
+       			if($duree == 1){
+       				$date =  date('Y-m-d', strtotime('+7 days'));
+       			}
+       			if($duree == 2){
+       				$date =  date('Y-m-d', strtotime('+14 days'));
+       			}
+            $this->ManuelModel->validerPret($id_support,$date);
+            redirect('/Manuel/ListeEmprunt', 'refresh');
+        }
+    }
+        else{
             redirect('/Welcome/connexion', 'refresh');
         }
     }
@@ -241,5 +273,14 @@ class Manuel extends CI_Controller {
 
 	}
 
+	public function retourner($id_support){
+	$this->load->model('ManuelModel');
+		if ($this->session->has_userdata('id')) {
+			$this->ManuelModel->retourner($id_support);
+			redirect('/Manuel/ListePretes', 'refresh');
 
+		}else{
+			redirect('/Welcome/connexion', 'refresh');
+		}
+	}
 }
