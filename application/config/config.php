@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -22,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8888/ProjectUni-v3';
-
+$config['base_url'] = 'http://localhost/univshop/';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,6 @@ $config['base_url'] = 'http://localhost:8888/ProjectUni-v3';
 |
 */
 $config['index_page'] = 'index.php';
-
 
 /*
 |--------------------------------------------------------------------------
@@ -385,7 +384,6 @@ $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
-$config['sess_save_path'] = sys_get_temp_dir();
 
 /*
 |--------------------------------------------------------------------------
