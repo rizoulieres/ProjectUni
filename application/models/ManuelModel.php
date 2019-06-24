@@ -182,11 +182,6 @@ class ManuelModel extends CI_Model {
 	}
 
 
-	public function getManuel($id){
-		$query = $this->db->select('*')->from('support')->where('id_support',$id)->get();
-
-		$query = $query->result();
-		return $query[0];
-	}
+	
 
 }
