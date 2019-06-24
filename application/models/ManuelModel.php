@@ -191,6 +191,7 @@ class ManuelModel extends CI_Model {
 		$this->db->update('support');
 	}
 
+<<<<<<< HEAD
 	public function afficherManuelEmprunt($id_acheteur){
 		$this->db->select('*');
         $this->db->from('support');
@@ -221,5 +222,8 @@ class ManuelModel extends CI_Model {
 
 		$this->db->update('support');
 	}
+=======
+	
+>>>>>>> a225ac8712e8977418e9fd56e5995137f0190dbf
 
 }
