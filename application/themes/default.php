@@ -59,13 +59,14 @@
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-shopping-basket"></i>
-				<span>Acheter</span>
+				<span>Acheter | Emprunter</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Components:</h6>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/liste') ?>">Liste</a>
-					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres réservés</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes réservations</a>
+                    <a class="collapse-item" href="<?php echo site_url('Manuel/ListeAcheter') ?>">Mes achats</a>
+                    <a class="collapse-item" href="<?php echo site_url('Manuel/ListeEmprunt') ?>">Mes emprunts</a>
 				</div>
 			</div>
 		</li>
@@ -81,6 +82,7 @@
 					<a class="collapse-item" href="<?php echo site_url('Manuel/vendre') ?>">Vendre un manuel</a>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/listeMesManuels') ?>">Mes manuels en ventes</a>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/ListeVendus') ?>">Mes manuels vendu</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/ListePretes') ?>">Mes prêts</a>
 
 				</div>
 			</div>
