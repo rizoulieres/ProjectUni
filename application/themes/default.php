@@ -65,7 +65,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Components:</h6>
 					<a class="collapse-item" href="<?php echo site_url('Manuel/liste') ?>">Liste</a>
-					<a class="collapse-item" href="#">????</a>
+					<a class="collapse-item" href="<?php echo site_url('Manuel/Listereserver') ?>">Mes livres réservés</a>
 				</div>
 			</div>
 		</li>

@@ -60,14 +60,27 @@ class ManuelModel extends CI_Model {
 		return $query->result();
 	}
 
-	public function changeEtatManuel($id_support){
+	public function reserver($id_support,$id_acheteur){
          $this->db->set('id_etat', '3', FALSE);
+         $this->db->set('id_acheteur', $id_acheteur, FALSE);
          $this->db->where('id_support',$id_support);
+
+
          $this->db->update('support');
     }
+
+    public function afficherManuelReserve($id_user){
+        $this->db->select('*');
+        $this->db->from('support');
+        $this->db->where('id_acheteur',$id_user);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
 	/*public function getManuelById($id){
 	    $query = $this->db->select('*')->from('support', 'matiere')->get();
-        $this->db->join('annonce_cours', 'cours_valide.id_cours = annonce_cours.id_cours');
         $this->db->where('id_support',$id);
         support as s,matiere as m WHERE id_support = 3 and s.id_matiere = m.id_matiere
 
