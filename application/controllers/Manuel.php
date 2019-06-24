@@ -84,7 +84,7 @@ class Manuel extends CI_Controller {
 	    $this->load->model('ManuelModel');
 
         if ($this->session->has_userdata('id')) {
-            $data['id_support'] = $this->ManuelModel->reserver($id_support,$this->session->id);
+            $this->ManuelModel->reserver($id_support,$this->session->id);
             redirect('/Manuel/Listereserver', 'refresh');
         }else {
             redirect('/Welcome/connexion', 'refresh');
@@ -96,7 +96,7 @@ class Manuel extends CI_Controller {
         $this->load->model('ManuelModel');
         if ($this->session->has_userdata('id')) {
             $data['liste'] = $this->ManuelModel->afficherManuelReserve($this->session->id);
-            $this->layout->set_titre('Liste manuels reservé');
+            $this->layout->set_titre('Liste manuels reservés');
             $this->layout->view('Manuel/reserve',$data);
         }
     }

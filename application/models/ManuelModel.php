@@ -117,7 +117,6 @@ class ManuelModel extends CI_Model {
         $this->db->update('support');
     }
 
-
 	public function getMesManuels($id_user){
 		$this->db->select('*');
 		$this->db->from('support');
@@ -183,6 +182,6 @@ class ManuelModel extends CI_Model {
 	}
 
 
-
+	
 
 }
