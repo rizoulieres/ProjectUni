@@ -80,7 +80,6 @@ class Manuel extends CI_Controller {
 
 	}
 
-<<<<<<< HEAD
 	public function reserver($id_support){
 	    $this->load->model('ManuelModel');
 
@@ -114,7 +113,6 @@ class Manuel extends CI_Controller {
     }
 
 
-=======
 
 	public function listeMesManuels(){
 		$this->load->model('ManuelModel');
@@ -131,5 +129,4 @@ class Manuel extends CI_Controller {
 		}
 
 	}
->>>>>>> e67db0547382fb930d396ab637d205034bc2f9a4
 }
