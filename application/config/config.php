@@ -25,6 +25,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost:8888/ProjectUni-v3';
 
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -454,6 +459,8 @@ $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array();
+$config['sess_save_path'] = sys_get_temp_dir();
+
 
 /*
 |--------------------------------------------------------------------------
