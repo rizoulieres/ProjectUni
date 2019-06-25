@@ -43,6 +43,7 @@ class Welcome extends CI_Controller {
 
 			if($this->UserModel->checkUsername($username) && $this->UserModel->checkMail($mail) ) {
 					$this->UserModel->createUser($username, $nom, $prenom, $mdp, $univ,$mail);
+					redirect('/Welcome/connexion', 'refresh');
 			}else{
 				if(!$this->UserModel->checkUsername($username)){
 					$data["checkUsername"]="Username déjà utilisé";

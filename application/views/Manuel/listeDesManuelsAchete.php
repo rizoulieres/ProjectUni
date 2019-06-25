@@ -1,7 +1,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Liste de mes manuels Achetés</h1>
+    <h1 class="h3 mb-0 text-gray-800">Mes manuels achetés</h1>
 </div>
 
 <div class="row">

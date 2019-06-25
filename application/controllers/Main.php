@@ -122,6 +122,26 @@ class Main extends CI_Controller
 			$data['note_2'] = $this->UserModel->avg($id,2);
 			$data['note_3'] = $this->UserModel->avg($id,3);
 			$data['note_4'] = $this->UserModel->avg($id,4);
+			$data['note_desc1N'] = $this->UserModel->getnoteNum($id,1);
+			$data['note_desc2N'] = $this->UserModel->getnoteNum($id,2);
+			$data['note_desc3N'] = $this->UserModel->getnoteNum($id,3);
+			$data['note_desc4N'] = $this->UserModel->getnoteNum($id,4);
+			if($data['note_desc1N']>0){
+				$data['note_desc1'] = $this->UserModel->getnote($id,1);
+			}
+			if($data['note_desc2N']>0){
+				$data['note_desc2'] = $this->UserModel->getnote($id,2);
+			}
+			if($data['note_desc3N']>0){
+				$data['note_desc3'] = $this->UserModel->getnote($id,3);
+			}
+			if($data['note_desc4N']>0){
+				$data['note_desc4'] = $this->UserModel->getnote($id,4);
+			}
+
+
+
+
 
 			$this->layout->set_titre($user->nom." ".$user->prenom);
 			$this->layout->view('Main/notes_profil', $data);

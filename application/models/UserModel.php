@@ -158,4 +158,19 @@ class UserModel extends CI_Model {
 		return $query[0]->note;
 	}
 
+	public function getnote($id,$id_type){
+		$array = array('id_notee' => $id, 'id_type' => $id_type);
+		$query = $this->db->select('*')->from('notes')->where($array)->get();
+
+		$query = $query->result();
+		return $query[0];
+	}
+
+	public function getnoteNum($id,$id_type){
+		$array = array('id_notee' => $id, 'id_type' => $id_type);
+		$query = $this->db->select('*')->from('notes')->where($array)->get();
+
+		return $query->num_rows();
+	}
+
 }

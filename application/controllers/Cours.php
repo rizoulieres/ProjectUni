@@ -98,7 +98,7 @@ class Cours extends CI_Controller {
 				}
 			}
 			$this->CoursModel->annonce($titre,$prix,$this->session->id,$id_mat,$desc,$lundi,$mardi,$mercredi,$jeudi,$vendredi,$samedi,$dimanche);
-
+			redirect('/Cours/listeCoursProf', 'refresh');
 		}
 
 		if ($this->session->has_userdata('id')) {
@@ -106,7 +106,7 @@ class Cours extends CI_Controller {
 			$data['mat'] = $this->CoursModel->getMatById($id_mat);
 			$this->layout->set_titre('Liste des matières');
 
-			$this->layout->view('Cours/planningElev',$data);
+			$this->layout->view('Cours/formProp',$data);
 
 		}else{
 			redirect('/Welcome/connexion', 'refresh');

@@ -34,9 +34,9 @@ class Manuel extends CI_Controller {
 					$uploadData = $this->upload->data();
 					$data['file'] = $uploadData['file_name'];
 
-					$data['photoChanged'] = 'OK';
+					echo $data['photoChanged'] = 'OK';
 				}else{
-					$data['photoChanged'] = ' pas OK';
+					echo $data['photoChanged'] = ' pas OK';
 				}
 
 			}
@@ -156,7 +156,7 @@ class Manuel extends CI_Controller {
         if ($this->session->has_userdata('id')) {
                if ($this->ManuelModel->getManuel($id_support)->id_type == 1){
             	$this->ManuelModel->valider($id_support);
-            	redirect('/Manuel/Listereserver', 'refresh');
+            	redirect('/Manuel/ListeAcheter', 'refresh');
        		}
        		else if ($this->ManuelModel->getManuel($id_support)->id_type == 2){
        			$duree = $this->ManuelModel->getManuel($id_support)->duree_pret;
@@ -239,10 +239,10 @@ class Manuel extends CI_Controller {
 					$uploadData = $this->upload->data();
 					$data['file'] = $uploadData['file_name'];
 
-					$data['photoChanged'] = 'OK';
+					echo $data['photoChanged'] = 'OK';
 					$photo = $data['file'];
 				}else{
-					$data['photoChanged'] = ' pas OK';
+					echo $data['photoChanged'] = ' pas OK';
 				}
 
 			}

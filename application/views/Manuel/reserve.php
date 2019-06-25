@@ -1,16 +1,16 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Liste Manuel réservé</h1>
+    <h1 class="h3 mb-0 text-gray-800">Mes manuels réservés</h1>
 </div>
 <?php $date =  date('Y-m-d', strtotime('-1 days')); ?>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">id</th>
-        <th scope="col">titre</th>
-        <th scope="col">auteur</th>
-        <th scope="col">editeur</th>
-        <th scope="col">année de parution</th>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Auteur</th>
+        <th scope="col">Editeur</th>
+        <th scope="col">Année d'édition</th>
         <th scope="col">Description</th>
         <th scope="col">Action</th>
     </tr>
